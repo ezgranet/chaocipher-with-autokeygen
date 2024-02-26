@@ -12,7 +12,7 @@ import sys, optparse, re
 import string_utils
 
 class Chaocipher:
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_";
 
     def __init__(self, left, right,autoleft,autoright):
         self.orig_left = left
@@ -35,10 +35,10 @@ class Chaocipher:
         autoleft = self.autoleft
         autoright = self.autoright
 
-        if len(left) != 26:
-            raise Exception("Left side must contain 26 characters")
-        if len(right) != 26:
-            raise Exception("Right side must contain 26 characters")
+        if len(left) < 26:
+            raise Exception("Left side must contain at least 26 characters")
+        if len(right) < 26:
+            raise Exception("Right side must contain at least 26 characters")
 
         for i in range(26):
             char = self.alphabet[i]
@@ -119,13 +119,13 @@ if __name__ == '__main__':
     usage = "%prog [--left LEFT] [--right RIGHT] [--encrypt|--autoencrypt|--decrypt]"
     parser = optparse.OptionParser(usage=usage)
     parser.add_option("--left", help="left alphabet",
-                      default="HXUCZVAMDSLKPEFJRIGTWOBNYQ")
+                      default="0123456789_HXUCZVAMDSLKPEFJRIGTWOBNYQ")
     parser.add_option("--right", help="right alphabet",
-                      default="PTLNBQDEOYSFAVZKGJRIHWXUMC")
+                      default="PTLNBQDEO0123456789_YSFAVZKGJRIHWXUMC")
     parser.add_option("--autoleft", help="automatic  left alphabet",
-                      default=string_utils.shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+                      default=string_utils.shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"))
     parser.add_option("--autoright", help="automatic right alphabet",
-                      default=string_utils.shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+                      default=string_utils.shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"))
     parser.add_option("--encrypt", help="perform encryption",
                       action="store_const", const="encrypt", dest="mode",
                       default="encrypt")
@@ -140,11 +140,11 @@ if __name__ == '__main__':
 
     if sys.stdin.isatty():
         if options.mode == "encrypt":
-            print("Using left: %s" % options.left)
+            print("Using  left: %s" % options.left)
             print("Using right: %s" % options.right)
             print("Enter plaintext (Ctrl-D to finish):")
-        elif options.mode == "autoencrypt":
-            print("Using autoleft: %s" % options.autoleft)
+        elif options.mode == "autoencrypt": 
+            print("Using  autoleft: %s" % options.autoleft)
             print("Using autoright: %s" % options.autoright)
             print("Enter plaintext (Ctrl-D to finish):")
         else:
@@ -155,5 +155,9 @@ if __name__ == '__main__':
     result = C.crypt(text, options.mode)
     if sys.stdin.isatty():
         print("%sed result:\n%s" % (options.mode, result))
+    elif options.mode == "autoencrypt":
+        print("Using autoleft: %s" % options.autoleft)
+        print("Using autoright: %s" % options.autoright)
+        print(result)
     else:
         print(result)
