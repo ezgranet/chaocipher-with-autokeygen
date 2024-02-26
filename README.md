@@ -26,4 +26,4 @@ An example of encrypting a file:
     cat myfile.txt | python3 chao.py --autoencrypt
 
 An example of decrypting text entered from the terminal:
-     python3 chao.py --decrypt --left HXUCZVAMDSLKPEFJRIGTWOBNYQ --right PTLNBQDEOYSFAVZKGJRIHWXUMC
+    python3 chao.py --decrypt --left HXUCZVAMDSLKPEFJRIGTWOBNYQ --right PTLNBQDEOYSFAVZKGJRIHWXUMC
