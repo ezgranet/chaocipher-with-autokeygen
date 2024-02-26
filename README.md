@@ -1,4 +1,4 @@
-## Chaocipher: Javascript and Python versions
+## Chaocipher:  Python versions with automatic key generation
 
 
 ### Description
@@ -14,23 +14,16 @@ by Moshe Rubin.
 
 ### Usage
 
-#### Javascript:
 
-Load the chao.html in a browser. Enter the left and right alphabets.
-Enter either the plaintext or the ciphertext and click "Encrypt" or
-"Decrypt" respectively.
-
-
-#### Python:
 
 The python program `chao.py` reads the plaintext or ciphertext from
-standard input and writes the result to stdout. The left and right
+standard input and writes the result to stdout.  The `--encrypt` and `--decrypt` and  arguments specify the
+mode. The left and right
 alphabets are set using the `--left` and `--right` arguments
-respectively. The `--encrypt` and `--decrypt` arguments specify the
-mode.
+respectively.
 
 An example of encrypting a file:
-    cat myfile | ./chao.py --encrypt --left HXUCZVAMDSLKPEFJRIGTWOBNYQ --right PTLNBQDEOYSFAVZKGJRIHWXUMC
+    cat myfile.txt | python3 chao.py --autoencrypt
 
 An example of decrypting text entered from the terminal:
-     ./chao.py --decrypt --left HXUCZVAMDSLKPEFJRIGTWOBNYQ --right PTLNBQDEOYSFAVZKGJRIHWXUMC
+     python3 chao.py --decrypt --left HXUCZVAMDSLKPEFJRIGTWOBNYQ --right PTLNBQDEOYSFAVZKGJRIHWXUMC
