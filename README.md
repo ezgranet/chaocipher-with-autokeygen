@@ -17,9 +17,8 @@ by Moshe Rubin.
 
 
 The python program `chao.py` reads the plaintext or ciphertext from
-standard input and writes the result to stdout.  The `--encrypt` and `--decrypt` and  arguments specify the
-mode. The left and right
-alphabets are set using the `--left` and `--right` arguments
+standard input and writes the result to stdout.  The `--encrypt` and `--decrypt` and  `--autoencrypt` arguments specify the
+mode. For `--autoencrypt`, random left and right alphabets are automatically generated. For `--encrypt` and `--decrypt`, you need  left and right alphabets set manu8ally using the `--left` and `--right` arguments
 respectively.
 
 An example of encrypting a file:
