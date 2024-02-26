@@ -23,7 +23,9 @@ alphabets are set using the `--left` and `--right` arguments
 respectively.
 
 An example of encrypting a file:
+
     cat myfile.txt | python3 chao.py --autoencrypt
 
 An example of decrypting text entered from the terminal:
+
     python3 chao.py --decrypt --left HXUCZVAMDSLKPEFJRIGTWOBNYQ --right PTLNBQDEOYSFAVZKGJRIHWXUMC
