@@ -12,7 +12,7 @@ import sys, optparse, re
 import string_utils
 
 class Chaocipher:
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-";
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.";
 
     def __init__(self, left, right,autoleft,autoright):
         self.orig_left = left
@@ -119,13 +119,13 @@ if __name__ == '__main__':
     usage = "%prog [--left LEFT] [--right RIGHT] [--encrypt|--autoencrypt|--decrypt]"
     parser = optparse.OptionParser(usage=usage)
     parser.add_option("--left", help="left alphabet",
-                      default="0123456789_HXUCZVAMDSLKPEFJRIGTWOBNYQ-")
+                      default="0123456789_HXUCZVAMDSLKPEFJRIGTWOBNYQ.")
     parser.add_option("--right", help="right alphabet",
-                      default="PTLNBQDEO0123456789_YSFAVZKGJRI-HWXUMC")
+                      default="PTLNBQDEO0123456789_YSFAVZKGJRI.HWXUMC")
     parser.add_option("--autoleft", help="automatic  left alphabet",
-                      default=string_utils.shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-"))
+                      default=string_utils.shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._"))
     parser.add_option("--autoright", help="automatic right alphabet",
-                      default=string_utils.shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-"))
+                      default=string_utils.shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._"))
     parser.add_option("--encrypt", help="perform encryption",
                       action="store_const", const="encrypt", dest="mode",
                       default="encrypt")
