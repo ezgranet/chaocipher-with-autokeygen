@@ -12,7 +12,7 @@ import sys, optparse, re
 import string_utils
 
 class Chaocipher:
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_";
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-";
 
     def __init__(self, left, right,autoleft,autoright):
         self.orig_left = left
@@ -35,12 +35,12 @@ class Chaocipher:
         autoleft = self.autoleft
         autoright = self.autoright
 
-        if len(left) < 37:
-            raise Exception("Left side must contain at least 37 characters")
-        if len(right) < 37:
-            raise Exception("Right side must contain at least 37 characters")
+        if len(left) != 38:
+            raise Exception("Left side must contain 38 characters")
+        if len(right) != 38:
+            raise Exception("Right side must contain 38 characters")
 
-        for i in range(37):
+        for i in range(38):
             char = self.alphabet[i]
             if left.count(char) != 1:
                 raise Exception("Left side missing '%s'" % char)
@@ -56,7 +56,7 @@ class Chaocipher:
         # Step 2 and 3: extract zenith +1
         char = self.left.pop(1)
         # Step 4: Insert at nadir
-        self.left.insert(13, char)
+        self.left.insert(19, char)
 
         # Permute the right
 
@@ -66,7 +66,7 @@ class Chaocipher:
         # Step 3 and 4: remove zenith + 2
         char = self.right.pop(2)
         # Step 5: insert at nadir
-        self.right.insert(13, char)
+        self.right.insert(19, char)
         # Permute the autoleft
 
         # Step 1: Rotate idx to zenith
@@ -75,7 +75,7 @@ class Chaocipher:
         # Step 2 and 3: extract zenith +1
         char = self.autoleft.pop(1)
         # Step 4: Insert at nadir
-        self.autoleft.insert(13, char)
+        self.autoleft.insert(19, char)
 
         # Permute the autoright
 
@@ -85,7 +85,7 @@ class Chaocipher:
         # Step 3 and 4: remove zenith + 2
         char = self.autoright.pop(2)
         # Step 5: insert at nadir
-        self.autoright.insert(13, char)
+        self.autoright.insert(19, char)
 
     def crypt(self, text, mode):
         src = list(text)
@@ -104,8 +104,8 @@ class Chaocipher:
                 idx = self.autoleft.index(char)
                 dest.append(self.autoright[idx])
             else:
-                idx = self.right.index(char)
-                dest.append(self.left[idx])
+                idx = self.left.index(char)
+                dest.append(self.right[idx])
 
             if cnt + 1 == len(src):
                 break
@@ -119,13 +119,13 @@ if __name__ == '__main__':
     usage = "%prog [--left LEFT] [--right RIGHT] [--encrypt|--autoencrypt|--decrypt]"
     parser = optparse.OptionParser(usage=usage)
     parser.add_option("--left", help="left alphabet",
-                      default="0123456789_HXUCZVAMDSLKPEFJRIGTWOBNYQ")
+                      default="0123456789_HXUCZVAMDSLKPEFJRIGTWOBNYQ-")
     parser.add_option("--right", help="right alphabet",
-                      default="PTLNBQDEO0123456789_YSFAVZKGJRIHWXUMC")
+                      default="PTLNBQDEO0123456789_YSFAVZKGJRI-HWXUMC")
     parser.add_option("--autoleft", help="automatic  left alphabet",
-                      default=string_utils.shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"))
+                      default=string_utils.shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-"))
     parser.add_option("--autoright", help="automatic right alphabet",
-                      default=string_utils.shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"))
+                      default=string_utils.shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-"))
     parser.add_option("--encrypt", help="perform encryption",
                       action="store_const", const="encrypt", dest="mode",
                       default="encrypt")
