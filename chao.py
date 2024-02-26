@@ -35,12 +35,12 @@ class Chaocipher:
         autoleft = self.autoleft
         autoright = self.autoright
 
-        if len(left) < 26:
-            raise Exception("Left side must contain at least 26 characters")
-        if len(right) < 26:
-            raise Exception("Right side must contain at least 26 characters")
+        if len(left) < 37:
+            raise Exception("Left side must contain at least 37 characters")
+        if len(right) < 37:
+            raise Exception("Right side must contain at least 37 characters")
 
-        for i in range(26):
+        for i in range(37):
             char = self.alphabet[i]
             if left.count(char) != 1:
                 raise Exception("Left side missing '%s'" % char)
